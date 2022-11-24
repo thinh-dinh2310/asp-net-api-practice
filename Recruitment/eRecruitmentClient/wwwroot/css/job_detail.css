@@ -1,0 +1,324 @@
+﻿.background {
+    background-image: linear-gradient(to bottom, #dff5fe, #dbf6f4, #e1f5e7, #eff2db, #ffecd8);
+    background-position: center center;
+    background-size: cover;
+    min-height: calc(100vh - 60px);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    transition: 0.2s
+}
+
+.sec-job-detail {
+    position: relative;
+    padding: 60px 0;
+}
+
+.bg-jobs-right {
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 25%;
+    height: 1110px;
+    background-image: url(https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/job/2020/bg-jobs-right.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    animation-name: floating;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.bg-jobs-left {
+    position: absolute;
+    bottom: 15%;
+    left: 0;
+    width: 20%;
+    height: 995px;
+    background-image: url(https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/job/2020/bg-jobs-left.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: left bottom;
+    animation-name: floating;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+    0% {
+        transform: translate(0, 0)
+    }
+
+    65% {
+        transform: translate(0, 30px)
+    }
+
+    100% {
+        transform: translate(0, 0)
+    }
+}
+
+body {
+    margin-bottom: 0;
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+.sec-job-detail .header {
+    position: relative;
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 5px 5px 15px rgb(224 224 224 / 50%);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+    .sec-job-detail .header .job-name {
+        color: #003c70;
+        font-family: "Avenir Demi", "Avenir Next";
+        font-weight: 600;
+        font-style: normal;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: normal;
+    }
+
+    .sec-job-detail .header .job-details {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .sec-job-detail .header .job-details p {
+            position: relative;
+            font-size: 16px;
+            line-height: 30px;
+            padding: 0 15px;
+            margin: 10px 0 15px;
+        }
+
+            .sec-job-detail .header .job-details p:first-child {
+                padding-left: 0;
+            }
+
+                .sec-job-detail .header .job-details p:first-child::before {
+                    display: none;
+                }
+
+            .sec-job-detail .header .job-details p::before {
+                content: "";
+                position: absolute;
+                width: 1px;
+                height: 80%;
+                left: 0;
+                top: 10%;
+                background-color: #e0e0e0;
+            }
+
+.btn-careers1 {
+    border: none;
+    display: inline-block;
+    color: #fff;
+    font-family: "Avenir Next", "AvenirNext LT Pro";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: normal;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px 2px rgb(144 144 144 / 20%);
+    background: radial-gradient(circle at 98% 13%, #38ccff, #14b1e7 28%);
+    padding: 16px 25px;
+    transition: transform .5s ease, box-shadow .5s ease;
+}
+
+
+
+    .btn-careers2:hover {
+        text-decoration: none;
+        color: #fff;
+        transform: translateY(-10px);
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+.btn-careers3 {
+    border: none;
+    display: inline-block;
+    color: #fff;
+    font-family: "Avenir Next", "AvenirNext LT Pro";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: normal;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px 2px rgb(144 144 144 / 20%);
+    background: radial-gradient(circle at 98% 13%, #38ccff, #14b1e7 28%);
+    padding: 16px 25px;
+    transition: transform .5s ease, box-shadow .5s ease;
+}
+
+.btn-careers3 {
+    font-family: "Avenir", "Avenir Next";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: normal;
+    margin-bottom: 10px;
+    text-decoration: none;
+    background: radial-gradient(circle at 98% 13%, #adbbbd, #6c757d 28%)
+}
+
+.btn-careers1 {
+    font-family: "Avenir", "Avenir Next";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: normal;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+    .btn-careers1:hover {
+        text-decoration: none;
+        color: #fff;
+        box-shadow: 0 4px 20px 2px rgb(152 197 214 / 69%);
+        transform: translateY(-10px);
+    }
+
+    .btn-careers3:hover {
+        text-decoration: none;
+        color: #fff;
+        box-shadow: 0 4px 20px 2px rgb(152 197 214 / 69%);
+        transform: translateY(-10px);
+    }
+
+.btn-careers2 {
+    font-family: "Avenir", "Avenir Next";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: normal;
+    margin-bottom: 10px;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px 2px rgb(144 144 144 / 20%);
+    padding: 16px 25px;
+    transition: transform .5s ease, box-shadow .5s ease;
+    background-color: #dc3545;
+}
+
+.sec-job-detail .header .bonus {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .sec-job-detail .header .bonus p:first-child {
+        margin-right: 15px;
+    }
+
+    .sec-job-detail .header .bonus .hybrid {
+        color: #14b1e7;
+        background-color: rgba(20, 177, 231, .1);
+        border-radius: 15px;
+        padding: 0 10px;
+    }
+
+.sec-job-detail .description {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+/*--------------------------Font Section---------------------------------*/
+@font-face {
+    font-family: 'Avenir';
+    src: url('../font/Avenir Next LT Pro Regular.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Bold';
+    src: url('../font/Avenir Next LT Pro Bold.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Demi';
+    src: url('../font/Avenir Next LT Pro Demi.otf');
+}
+/*--------------------------Font Section---------------------------------*/
+
+.modal-backdrop {
+    z-index: -1;
+}
+
+#applicationFormDiv {
+    background-image: linear-gradient(180deg,rgba(255,254,254,.00723886),#fcf5e4);
+}
+
+.textarea-apply {
+    width: 100%;
+    font-family: "Avenir Next","AvenirNext LT Pro";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 400;
+    color: #6c757d;
+    border-radius: 5px;
+    border: 0.5px solid #909090;
+    background-color: transparent;
+    padding-left: 6px;
+}
+
+.label-apply {
+    display: block;
+    color: #4a4a4a;
+    font-family: "Avenir Next","AvenirNext LT Pro";
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 5px;
+}
+
+.modal-close-button {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.modal-title {
+    color: #003c70;
+    font-weight: 800;
+    font-size: 20px;
+    font-family: "Avenir Demi","AvenirNext LT Pro";
+}
+
+
+.modal-header {
+    border-bottom: 0px;
+}
+
+.modal-footer{
+    border-top: 0px;
+}
+
+.modal-body label {
+    color: #212529;
+    font-weight: 500;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}

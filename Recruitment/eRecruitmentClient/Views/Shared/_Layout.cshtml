@@ -1,0 +1,87 @@
+﻿@using eRecruitmentClient.Utils
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eRecruitmentClient</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("head", false)
+</head>
+<body>
+    <header class="bg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-sm-9 col-12 h-100">
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0 d-flex h-100 align-items-center">
+                        <li class="nav-item h-100 pr-3">
+                            <a class="header-nav-item h-100 d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item h-100 pr-3">
+                            <a class="header-nav-item h-100 d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Job">All Jobs</a>
+                        </li>
+                        @if (AuthUtils.loginUser != null && !AuthUtils.IsAdmin())
+                        {
+                            <li class="nav-item h-100">
+                                <a class="header-nav-item h-100 d-flex align-items-center" asp-area="" asp-controller="Interviews" asp-action="Index">Interviews</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-sm-3 col-12 h-100">
+
+                    @if (AuthUtils.loginUser == null)
+                    {
+                        <ul class="list-unstyled d-flex align-items-center h-100">
+                            <li class="nav-item ">
+                                <a class="header-button mr-4" asp-area="" asp-controller="Home" asp-action="LoginPage">Login</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="header-button mr-4" asp-area="" asp-controller="Home" asp-action="RegisterPage">Register</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="profile-wrapper">
+                            <div class="main-avatar">
+                                <a class="mini-photo-wrapper" href="#">
+                                    <img class="mini-photo" src="~/images/avatar.png" width="36" height="36" />
+                                </a>
+                            </div>
+                            <div class="menu-container">
+                                <ul class="user-menu">
+                                    @{await Html.RenderPartialAsync("~/Views/Shared/_MiniNav.cshtml");}
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="col-sm-8 col-md-8 align-self-center col-left">
+                    <div class="logo-footer">
+                        <img src="~/images/Hope.png" alt="Hope Technology" title="Hope Technology">
+                    </div>
+                    <div class="copyright">
+                        © 2022 Hope Technology. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

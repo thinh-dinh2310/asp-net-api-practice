@@ -1,0 +1,69 @@
+﻿@model BusinessObject.DTO.FeedbackDTO
+@{
+    ViewData["Title"] = "Edit";
+    string mode = ViewBag.Mode;
+    SelectList listInterviewers = (SelectList)ViewData["Interviewer"];
+}
+
+<h1>Edit</h1>
+
+<h4>Interview</h4>
+<h5>@ViewBag.ErrorMessage</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="POST" asp-action="Edit" asp-route-mode="@mode">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InterviewerId" class="control-label"></label>
+                <select id="interviewerId" asp-for="InterviewerId" class="form-control" asp-items="@listInterviewers" disabled></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartDateTime" class="control-label"></label>
+                <input asp-for="StartDateTime" class="form-control" id="startDateTime" readonly/>
+                <span asp-validation-for="StartDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDateTime" class="control-label"></label>
+                <input asp-for="EndDateTime" class="form-control" id="endDateTime" readonly />
+                <span asp-validation-for="EndDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Feedback" class="control-label"></label>
+                <input asp-for="Feedback" class="form-control" id="feedback" readonly/>
+                <span asp-validation-for="Feedback" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input id="result" class="form-check-input" asp-for="Result" disabled /> @Html.DisplayNameFor(model => model.Result)
+                </label>
+            </div>
+            <input type="hidden" asp-for="Round" />
+            <p>Current round: @Model.Round</p>
+            <input type="hidden" asp-for="PostId" />
+            <input type="hidden" asp-for="ApplicantId" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @if(mode == "Edit") {
+        <script>
+            document.getElementById("startDateTime").removeAttribute("readonly");
+            document.getElementById("endDateTime").removeAttribute("readonly");
+        </script>
+    } else 
+    {
+        <script>
+            document.getElementById("feedback").removeAttribute("readonly");
+            document.getElementById("result").removeAttribute("disabled");
+        </script>
+    }
+}

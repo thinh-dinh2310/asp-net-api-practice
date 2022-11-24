@@ -1,0 +1,423 @@
+﻿.background {
+    background-image: linear-gradient(to bottom, #dff5fe, #dbf6f4, #e1f5e7, #eff2db, #ffecd8);
+    background-position: center center;
+    background-size: cover;
+    min-height: calc(100vh - 60px);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    transition: 0.2s
+}
+
+@keyframes floating {
+    0% {
+        transform: translate(0, 0)
+    }
+
+    65% {
+        transform: translate(0, 30px)
+    }
+
+    100% {
+        transform: translate(0, 0)
+    }
+}
+
+.sec-jobs-listing {
+    position: relative;
+    padding: 80px 0 120px 0;
+}
+
+    .sec-jobs-listing .bg-jobs-right {
+        position: absolute;
+        top: 10%;
+        right: 0;
+        width: 25%;
+        height: 1110px;
+        background-image: url(https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/job/2020/bg-jobs-right.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        animation-name: floating;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    .sec-jobs-listing .bg-jobs-left {
+        position: absolute;
+        bottom: 15%;
+        left: 0;
+        width: 20%;
+        height: 995px;
+        background-image: url(https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/job/2020/bg-jobs-left.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: left bottom;
+        animation-name: floating;
+        animation-duration: 5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    .sec-jobs-listing .jobs {
+        position: relative;
+    }
+
+        .sec-jobs-listing .jobs .find-jobs {
+            position: sticky;
+            top: 80px;
+            padding-right: 25px;
+        }
+
+        .sec-jobs-listing .jobs .search-key {
+            margin-bottom: 20px;
+        }
+
+            .sec-jobs-listing .jobs .search-key h6 {
+                color: #4a4a4a;
+                font-size: 16px;
+                line-height: 22px;
+                margin-bottom: 10px;
+            }
+
+            .sec-jobs-listing .jobs .search-key .search-box {
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.sec-jobs-listing .jobs .search-key .search-box .fa-search {
+    color: #4a4a4a;
+    position: absolute;
+    left: 15px;
+    z-index: 1;
+    cursor: pointer 
+}
+
+.fa-search:before {
+    content: "\f002";
+}
+
+.sec-jobs-listing .jobs .search-key .search-box .search-all-jobs {
+    position: relative;
+    color: #4a4a4a;
+    font-family: "Avenir";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 30px;
+    width: 100%;
+    height: 45px;
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 5px 5px 15px rgb(224 224 224 / 50%);
+    border: none;
+    border-radius: 10px;
+    outline: 0;
+    padding: 0 40px;
+    margin: 0;
+}
+
+.sec-jobs-listing .jobs .search-key .search-box .clear-search-box {
+    display: block;
+    position: absolute;
+    right: 15px;
+    transition: opacity .5s ease-in-out;
+    display: flex;
+    align-items: center;
+}
+
+    .sec-jobs-listing .jobs .search-key .search-box .clear-search-box img {
+        background: #f8f8f8;
+        border-radius: 4px;
+        padding: 5px;
+        cursor: pointer;
+        z-index: 1;
+        border-style: none;
+        vertical-align: middle;
+    }
+
+.sec-jobs-listing .jobs .search-key .clear {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .sec-jobs-listing .jobs .search-key .clear p {
+        color: #909090;
+        font-family: "Avenir";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 30px;
+        margin: 0;
+        flex: 1;
+    }
+
+        .sec-jobs-listing .jobs .search-key .clear p span {
+            font-weight: 600;
+        }
+
+    .sec-jobs-listing .jobs .search-key .clear a {
+        color: #909090;
+        font-family: "Avenir Demi";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        line-height: 30px;
+        text-align: right;
+        text-decoration: none;
+        pointer-events: none;
+    }
+
+.clear:before {
+    content: "";
+    display: table;
+}
+
+.clear:after {
+    clear: both;
+}
+
+.sec-jobs-listing .jobs .inner-filter {
+    height: calc(100vh - (107px + 80px + 30px));
+    overflow-y: auto;
+}
+
+.page-template-jobs .sec-jobs-listing .jobs .inner-filter::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 9px;
+}
+
+.sec-jobs-listing .jobs .inner-filter::-webkit-scrollbar-thumb {
+    background-color: rgba(179, 179, 179, .5);
+    border-radius: 9px;
+}
+
+.sec-jobs-listing .jobs .filter.bonus {
+    display: inline-block;
+}
+
+.sec-jobs-listing .jobs .filter {
+    margin-bottom: 10px;
+}
+
+    .sec-jobs-listing .jobs .filter h6 {
+        color: #4a4a4a;
+        font-size: 16px;
+        line-height: 22px;
+        margin-bottom: 10px;
+        font-family: "Avenir Demi";
+    }
+
+    .sec-jobs-listing .jobs .filter .item {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .sec-jobs-listing .jobs .filter .item a {
+            color: #4a4a4a;
+            font-family: "Avenir";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+            line-height: 30px;
+            border: 0.5px solid rgba(144, 144, 144, .4);
+            border-radius: 20px;
+            padding: 0 10px;
+            margin: 0 5px 10px 0;
+            transition: all .2s ease-in-out;
+            text-decoration: none;
+        }
+
+            .sec-jobs-listing .jobs .filter .item a:hover {
+                color: #14b1e7;
+                text-decoration: none;
+                border-color: #14b1e7;
+            }
+
+.sec-jobs-listing .jobs .list-jobs {
+    padding-left: 48px;
+    animation: ease-in-out .2s
+}
+
+    .sec-jobs-listing .jobs .list-jobs .job-item {
+        position: relative;
+        box-shadow: 5px 5px 15px 0 rgb(224 224 224 / 50%);
+        background-color: rgba(255, 255, 255, .7);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        padding: 20px;
+        transition: transform .3s ease 0s;
+        -moz-transition: transform .3s ease 0s;
+        -o-transition: transform .3s ease 0s;
+        -webkit-transition: transform .3s ease 0s;
+        animation: move 1s;
+    }
+
+        .sec-jobs-listing .jobs .list-jobs .job-item > h6 {
+            color: #4a4a4a;
+            font-family: "Avenir Demi";
+            font-weight: 600;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 30px;
+            letter-spacing: normal;
+            margin-bottom: 5px;
+        }
+
+        .sec-jobs-listing .jobs .list-jobs .job-item .job-details {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+            .sec-jobs-listing .jobs .list-jobs .job-item .job-details p:first-child {
+                padding-left: 0;
+            }
+
+            .sec-jobs-listing .jobs .list-jobs .job-item .job-details p {
+                color: #909090;
+                position: relative;
+                font-size: 16px;
+                line-height: 30px;
+                padding: 0 20px;
+                margin-bottom: 0;
+            }
+
+                .sec-jobs-listing .jobs .list-jobs .job-item .job-details p::before {
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    height: 80%;
+                    left: 0;
+                    top: 10%;
+                    background-color: #e0e0e0;
+                }
+
+        .sec-jobs-listing .jobs .list-jobs .job-item .bonus {
+            display: flex;
+            flex-wrap: wrap;
+            padding-top: 15px;
+        }
+
+            .sec-jobs-listing .jobs .list-jobs .job-item .bonus p:first-child {
+                margin-right: 15px;
+            }
+
+            .sec-jobs-listing .jobs .list-jobs .job-item .bonus .month {
+                color: #2bb99d;
+                background: rgba(43, 213, 180, .12);
+                border-radius: 17.5px;
+                padding: 0 10px;
+            }
+
+            .sec-jobs-listing .jobs .list-jobs .job-item .bonus p {
+                font-family: "Avenir";
+                font-weight: 400;
+                font-style: normal;
+                font-size: 14px;
+                line-height: 30px;
+                margin-bottom: 10px;
+                margin-right: 15px
+            }
+
+        .sec-jobs-listing .jobs .list-jobs .job-item .job-details p:first-child:before {
+            display: none;
+        }
+
+        .sec-jobs-listing .jobs .list-jobs .job-item .bonus .remote {
+            color: #efc254;
+            background-color: rgba(252, 245, 228, .8);
+            border-radius: 17.5px;
+            padding: 0 10px;
+        }
+
+        .sec-jobs-listing .jobs .list-jobs .job-item .bonus .hybrid,
+        .page-template-jobs .sec-jobs-listing .jobs .list-jobs .job-item .bonus .referral {
+            color: #14b1e7;
+            background: rgba(20, 177, 231, .1);
+            border-radius: 17.5px;
+            padding: 0 10px;
+        }
+
+.sec-jobs-listing .jobs .inner-pagination {
+    margin-top: 50px;
+}
+
+    .sec-jobs-listing .jobs .inner-pagination .pagination {
+        justify-content: center;
+    }
+
+        .sec-jobs-listing .jobs .inner-pagination .pagination li a {
+            color: #909090;
+            font-family: "Avenir";
+            font-weight: 400;
+            font-style: normal;
+            font-size: 16px;
+            line-height: 30px;
+            text-decoration: none;
+            padding: 1px 7px;
+        }
+
+        .sec-jobs-listing .jobs .inner-pagination .pagination li.active a {
+            color: #fff;
+            background: radial-gradient(495.86% 132.87% at 97.94% 13.22%, #38ccff 0, #14b1e7 100%);
+            box-shadow: 0 0 10px #e0e0e0;
+            border-radius: 5px;
+        }
+
+.sec-jobs-listing .jobs .list-jobs .job-item:hover {
+    transform: scale(1.08);
+}
+
+    .sec-jobs-listing .jobs .list-jobs .job-item:hover > h6 {
+        color: #14b1e7;
+    }
+
+.link-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+body {
+    margin-bottom: 0;
+}
+
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+}
+
+.sec-jobs-listing .jobs .filter .item a.active {
+    color: #14b1e7;
+    border-color: #14b1e7;
+}
+/*--------------------------Font Section---------------------------------*/
+@font-face {
+    font-family: 'Avenir';
+    src: url('../font/Avenir Next LT Pro Regular.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Bold';
+    src: url('../font/Avenir Next LT Pro Bold.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Demi';
+    src: url('../font/Avenir Next LT Pro Demi.otf');
+}
+/*--------------------------Font Section---------------------------------*/

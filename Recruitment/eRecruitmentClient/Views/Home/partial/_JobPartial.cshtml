@@ -1,0 +1,45 @@
+﻿@using BusinessObject.DTO
+
+@model PaginationResult<PostViewModel>
+
+<div class="list-jobs list">
+    @foreach (var item in Model.data)
+    {
+    <div class="job-item">
+        <h6 class="job_title">
+            @Html.DisplayFor(modelItem => item.Title)
+        </h6>
+        <div class="job-details">
+            <p class="work_time">@Html.DisplayFor(modelItem => item.DisplayingLevel)</p>
+            <p class="location">@Html.DisplayFor(modelItem => item.DisplayingLocations)</p>
+            <p class="date">@item.CreatedAt.ToString("MMMM dd, yyyy")</p>
+        </div>
+        <div class="bonus ">
+            @foreach (var items in item.DisplayingSkills)
+            {
+                <p class="month">
+                    @items
+                </p>
+            }
+            <p class="remote">@Html.DisplayFor(modelItem => item.DisplayingCategory)</p>
+            <p class="hybrid">Hybrid work</p>
+        </div>
+        <a asp-area="" asp-controller="Home" asp-action="JobDetails" asp-route-id="@item.PostId" class="link-overlay"></a>
+    </div>
+    }
+</div>
+<div class="inner-pagination">
+    <ul class="pagination">
+        @foreach (int i in Enumerable.Range(1, (Model.totalItems / Model.limit)))
+        {
+            if (i == Convert.ToInt32(ViewData["CurrentPage"]))
+            {
+                <li class="active"><a class="page" href="#" onclick="jobPaging(@i - 1)">@i</a></li>
+            }
+            else
+            {
+                <li><a class="page" href="#" onclick="jobPaging(@i - 1)">@i</a></li>
+            }
+        }
+    </ul>
+</div>

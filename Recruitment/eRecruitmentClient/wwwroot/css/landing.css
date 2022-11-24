@@ -1,0 +1,316 @@
+﻿/*--------------------------Landing Page---------------------------------*/
+.sec-home-banner {
+    position: relative;
+    background-image: radial-gradient(circle at 50% 33%,#ace6ff,#26afe6 70%);
+    z-index: 1;
+}
+
+    .sec-home-banner h1 {
+        color: #fff;
+        font-family: 'Avenir Demi';
+        font-weight: 500;
+        font-style: normal;
+        font-size: 35px;
+        line-height: 1.35;
+        text-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    }
+
+.bg-center {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/fin.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom 5px right 80%;
+}
+
+.bg-model {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/bg-banner.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom -30px right 30%;
+}
+
+.sec-home-banner .caption {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh - 120px - 65px);
+}
+
+.search-box {
+    display: block;
+    padding-top: 30px;
+}
+
+.search-type {
+    position: relative;
+    margin-bottom: 15px;
+    width: 73%;
+}
+
+    .search-type .landing-search-icon {
+        position: absolute;
+        left: 15px;
+        z-index: 2;
+        top: 13px;
+        height: auto;
+        width: 15.5px;
+    }
+
+.search-box input {
+    position: relative;
+    color: #b3b3b3;
+    font-family: "Avenir";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.88;
+    width: 100%;
+    border-radius: 10px;
+    height: 45px;
+    background: #fff;
+    border: 0;
+    padding: 6px 15px;
+    margin-right: 15px;
+    padding-left: 45px;
+    color: #b3b3b3;
+}
+
+    .search-box input:focus {
+        outline: 0;
+    }
+
+.clear-search-box {
+    display: none;
+    position: absolute;
+    top: 9px;
+    right: 15px;
+    transition: opacity .5s ease-in-out;
+}
+
+    .clear-search-box .landing-clear-icon {
+        background: #f8f8f8;
+        border-radius: 4px;
+        padding: 5px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+.filter-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.location {
+    width: 35%;
+    margin-right: 3%;
+    display: inline-block;
+    position: relative;
+}
+
+.location img {
+    position: absolute;
+    left: 15px;
+    z-index: 2;
+    top: 14px;
+    height: 40%;
+}
+
+    .location .btn {
+        position: relative;
+        display: inline-block;
+        color: #b3b3b3;
+        font-family: "Avenir Demi";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 1.88;
+        border-radius: 10px;
+        height: 45px;
+        width: 100%;
+        background-color: #fff;
+        padding-left: 45px;
+        text-align:left;
+    }
+
+        .location .btn::after {
+            color: #4a4a4a;
+            content: "\f107";
+            position: absolute;
+            right: 15px;
+            top: 13px;
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: 20px;
+            border: none;
+        }
+
+.filter-search .btn-search-job {
+    font-family: "Avenir Demi";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+    line-height: normal;
+    letter-spacing: normal;
+    width: 35%;
+    height: 45px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 13px 1px rgb(144 144 144 / 50%);
+    background: radial-gradient(circle at 98% 13%,#2f3d42,#212729 27%);
+    color: #FFF;
+}
+
+.sec-experienced {
+    position: relative;
+    background: linear-gradient(-13deg,rgba(20,177,231,0) 35%,rgba(20,177,231,.1) 53%,rgba(20,177,231,0) 73%,rgba(20,177,231,0) 73%);
+    padding: 110px 0 80px 0;
+}
+
+.sec-experienced .caption {
+}
+
+    .sec-experienced .caption p {
+        color: #4a4a4a;
+        font-family: "Avenir";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 1.88;
+    }
+
+    .sec-experienced .caption h2 {
+        margin-bottom: 30px;
+        color: #0f4c81;
+        font-family: "Avenir Demi";
+        font-weight: 600;
+        font-style: normal;
+        font-size: 45px;
+        line-height: 1.33;
+        letter-spacing: normal;
+    }
+
+    .sec-experienced .caption a {
+        margin-top: 50px;
+    }
+
+.btn-careers1 {
+    display: inline-block;
+    color: #fff;
+    font-family: "Avenir";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    line-height: normal;
+    letter-spacing: normal;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px 2px rgb(144 144 144 / 20%);
+    background: radial-gradient(circle at 98% 13%,#38ccff,#14b1e7 28%);
+    padding: 16px 25px;
+    transition: transform .5s ease,box-shadow .5s ease;
+}
+
+.sec-experienced .experienced-slider-home {
+    z-index: 1;
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 30px;
+}
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+}
+
+.slick-list {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-track {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: block;
+}
+
+.sec-experienced .experienced-slider-home .slick-track {
+    display: flex;
+}
+
+.sec-experienced .experienced-slider-home .slick-slide {
+    margin: 0 20px 20px 20px;
+    height: auto;
+}
+
+    .sec-experienced .experienced-slider-home .slick-slide>div {
+        height: 100%;
+    }
+
+.sec-experienced .experienced-slider-home .slick-slide>div>li {
+    height: 100%;
+}
+
+.sec-experienced .experienced-slider-home .slick-slide.slick-active .inner {
+    box-shadow: 0 0 10px 5px rgb(20 177 231 / 10%);
+}
+
+.sec-experienced .container {
+    max-width: 1220px;
+}
+
+.sec-experienced .inner {
+    position: relative;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+    .sec-experienced .inner .image {
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .sec-experienced .inner h6 {
+        color: #4a4a4a;
+        font-size: 20px;
+        line-height: 1.15;
+        margin: 20px 0;
+    }
+
+    .sec-experienced .inner p {
+        color: #4a4a4a;
+        font-family: "Avenir";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .sec-experienced .inner .image img {
+        max-width: 261px;
+        max-height: 177px;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: all .5s;
+    }
+
+    .sec-experienced .inner:hover .image img {
+        transform: scale(1.2);
+    }
+/*--------------------------Landing Page---------------------------------*/

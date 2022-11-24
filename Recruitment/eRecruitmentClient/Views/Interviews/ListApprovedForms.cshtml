@@ -1,0 +1,120 @@
+@using BusinessObject
+@model List<Tuple<ApplicantPost, bool>>
+@using BusinessObject.DTO
+@using Utils
+@using System.Web;
+@using eRecruitmentClient.Utils
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<style>
+    .show {
+        display: block;
+    }
+
+    .remove {
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="~/css/user_mng.css" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+<div class="background">
+    <div class="main-content">
+        <div class="container">
+            <!-- Table -->
+            <h2 class="mb-3">All approved application forms</h2>
+            @if (ViewBag.CurrentMode == "All") 
+            {
+                <a asp-action="GetListApprovedForms" asp-controller="Interviews" asp-route-mode="OpenAndPendingPostOnly">Open and pending posts' forms only</a>
+            } else
+            {
+                <a asp-action="GetListApprovedForms" asp-controller="Interviews" asp-route-mode="All">All approved forms</a>
+            }
+            <div class="row">
+                <div class="col">
+                     <div class="card user-table">
+
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Applicant name</th>
+                                        <th scope="col">Post title</th>
+                                        <th scope="col">Message</th>
+                                        <th scope="col">Resume</th>
+                                        <th scope="col">Create interview</th>
+                                        <th scope="col">View interviews</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Item1.Applicant.DisplayName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Item1.Post.Title)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Item1.Message)
+                                            </td>
+                                            <td>
+                                                <a asp-action="DownloadResume" asp-controller="Forms" asp-route-postId="@item.Item1.PostId" asp-route-applicantId="@item.Item1.ApplicantId" asp-route-count="@item.Item1.Count">Download</a>
+                                            </td>
+                                            <td class="text-right">
+                                                @if(item.Item2)
+                                                {
+                                                    <a asp-action="Create" asp-controller="Interviews" asp-route-postId="@item.Item1.PostId" asp-route-applicantId="@item.Item1.ApplicantId">Create interview</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-action="GetListInterviewsByPostAndApplicant" asp-controller="Interviews" asp-route-postId="@item.Item1.PostId" asp-route-applicantId="@item.Item1.ApplicantId">Interviews</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer py-4">
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-end mb-0">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1">
+                                            <i class="fas fa-angle-left"></i>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">
+                                            <i class="fas fa-angle-right"></i>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+@section Scripts {
+
+
+}

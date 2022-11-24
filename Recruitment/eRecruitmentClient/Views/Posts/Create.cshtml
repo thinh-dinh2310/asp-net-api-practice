@@ -1,0 +1,100 @@
+﻿@model BusinessObject.DTO.PostForCreationDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+}
+
+@section head
+    {
+    <script src="~/js/ckeditor/build/ckeditor.js"></script>
+}
+
+<link rel="stylesheet" href="~/js/chosen_v1.8.7/chosen.css" />
+<link rel="stylesheet" href="~/css/user_mng.css" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+<style>
+    .ck-editor__editable {
+        min-height: 200px !important;
+    }
+</style>
+
+<div class="background">
+    <div class="container">
+        <form id="postCreationForm" asp-action="Create">
+            <div class="row">
+                <div class="col-md-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId" class="control-label"></label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Category"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control"/>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PostLocationsIds" class="control-label"></label>
+                        @Html.DropDownList("PostLocationsIds", ViewBag.Locations as SelectList, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label asp-for="LevelId" class="control-label"></label>
+                        <select asp-for="LevelId" class="form-control" asp-items="ViewBag.Levels"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PostSkillsIds" class="control-label"></label>
+                        <select asp-for="PostSkillsIds" class="chosen-select" asp-items="ViewBag.Skills"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <div id="editor">
+                </div>
+                <input id="postDescription" type="hidden" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger" id="ckeditor-warn"></span>
+            </div>
+            <div class="form-group">
+                <input id="formSubmit" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/chosen_v1.8.7/chosen.jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".chosen-select").chosen({
+                width: "100%"
+            });
+        });
+        let externalEditor;
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .then(editor => {
+                externalEditor = editor;
+                editor.model.document.on('change:data', () => {
+                    const data = editor.getData();
+                    document.getElementById("postDescription").value = data;
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+            document.getElementById("formSubmit").addEventListener("click", (e) => {
+                var message = document.getElementById("postDescription").value;
+                if (!message.length) {
+                    document.getElementById("ckeditor-warn").innerHTML = 'You must enter description'
+                    e.preventDefault();
+                }
+            });
+    </script>
+}

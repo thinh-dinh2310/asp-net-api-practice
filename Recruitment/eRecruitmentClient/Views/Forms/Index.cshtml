@@ -1,0 +1,389 @@
+@using BusinessObject
+@model APWithMissingSkill
+@using BusinessObject.DTO
+@using Utils
+@using System.Web;
+@using eRecruitmentClient.Utils
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+    PostViewModel postVm = (PostViewModel)ViewData["CurrentPost"];
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<style>
+    .show {
+        display: block;
+    }
+
+    .remove {
+        display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="~/css/user_mng.css" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+<!-- The below code is for the modal dialog -->
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <a href="#close" title="Close" class="modal-close-btn">X</a>
+    <div class="modal-content">
+        <div class="modal-body"></div>
+    </div>
+</div>
+
+<div class="background">
+    <div class="main-content mt-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 p-0 left-tab">
+                    <ul class="list-group">
+                        @if ((int)ViewData["CurrentStatus"] == 0)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0">Show All</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5 ">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0">Show All</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 1)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=1">Open</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=1">Open</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 2)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=2">Approved</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=2">Approved</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 3)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=3">Rejected</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=3">Rejected</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 4)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=4">Revoked</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=4">Revoked</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 5)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=5">Pending</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=5">Pending</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 6)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=6">Canceled</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=6">Canceled</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 7)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=7">Successful</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=7">Successful</a>
+                            </li>
+                        }
+                        @if ((int)ViewData["CurrentStatus"] == 8)
+                        {
+                            <li class="p-3 pl-5 left-tab-active">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=8">Failed</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p-3 pl-5">
+                                <a href="/Forms?postId=@postVm.PostId&limit=7&offset=0&status=8">Failed</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-10 p-0" style="margin-left: -2rem">
+                    <div class="card user-table">
+                        <div class="table-title row">
+                            <div class="card-header border-0 col-md-10">
+                                <h3 class="mb-0">Application forms of post: @postVm.Title</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Applicant Name</th>
+                                        <th scope="col">Message</th>
+                                        <th scope="col">Resume</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Number of applications</th>
+                                        <th>Suitable</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ap.data)
+                                    {
+                                        <tr class="filterRow status-@item.Status">
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Applicant.FirstName) @Html.DisplayFor(modelItem => item.Applicant.LastName)
+                                            </td>
+                                            <td>
+
+                                                @Html.DisplayFor(modelItem => item.Message)
+                                            </td>
+                                            <td>
+                                                <a asp-action="DownloadResume" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-count="@item.Count">Download</a>
+                                            </td>
+                                            <td>
+                                                @switch (item.Status)
+                                                {
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.Open:
+                                                        <p>Opening</p>
+                                                        break;
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.Approved:
+                                                        <p>Approved</p>
+                                                        break;
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.Rejected:
+                                                        <p>Rejected</p>
+                                                        break;
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.Revoked:
+                                                        <p>Revoked</p>
+                                                        break;
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.BatchRejected:
+                                                        <p>Closed</p>
+                                                        break;
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.Successfully:
+                                                        <p>Successful</p>
+                                                        break;
+                                                    case CommonEnums.APPLICATION_FORM_STATUS.Failed:
+                                                        <p>Failed</p>
+                                                        break;
+                                                    default:
+                                                        <p>Opening</p>
+                                                        break;
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Count)
+                                            </td>
+                                            <td class="d-flex ">
+                                                @foreach (var items in Model.userMissingSkills)
+                                                {
+                                                    @if (items.userId == item.ApplicantId && items.missingSkills.Count() != 0)
+                                                    {
+                                                        <span class="mr-2"> Missing Skill: </span>
+                                                        @foreach (var skill in items.missingSkills)
+                                                        {
+                                                            <span class="text-danger mr-1"> @skill.SkillName </span>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="text-success">Matched</span>
+                                                    }
+                                                }
+                                            </td>
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item" asp-action="Detail" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-count="@item.Count">Detail</a>
+
+                                                        @if (AuthUtils.IsHr())
+                                                        {
+                                                            @if (@postVm.Status == CommonEnums.POST_STATUS.Available || @postVm.Status == CommonEnums.POST_STATUS.Pending)
+                                                            {
+                                                                if (item.Status == CommonEnums.APPLICATION_FORM_STATUS.Open || item.Status == CommonEnums.APPLICATION_FORM_STATUS.Approved)
+                                                                {
+                                                                    if (item.Status == CommonEnums.APPLICATION_FORM_STATUS.Open)
+                                                                    {
+                                                                        <form method="POST" asp-action="Status">
+                                                                            <input type="hidden" name="postId" value="@item.PostId" />
+                                                                            <input type="hidden" name="userId" value="@item.ApplicantId" />
+                                                                            <input type="hidden" name="status" value="@CommonEnums.APPLICATION_FORM_STATUS.Approved" />
+                                                                            <a class="dropdown-item" href="#" onclick="this.closest('form').submit();return false;">Approve</a>
+                                                                        </form>
+                                                                    }
+                                                                    <form method="POST" asp-action="Status">
+                                                                        <input type="hidden" name="postId" value="@item.PostId" />
+                                                                        <input type="hidden" name="userId" value="@item.ApplicantId" />
+                                                                        <input type="hidden" name="status" value="@CommonEnums.APPLICATION_FORM_STATUS.Rejected" />
+                                                                        <a class="dropdown-item" href="#" onclick="this.closest('form').submit();return false;">Reject</a>
+                                                                    </form>
+                                                                }
+                                                            }
+
+
+                                                        }
+
+                                                        <!-- /.modal -->
+                                                        <button type="button" class="btn btn-success btn-sm dropdown-item modal-link"
+                                                                data-targeturl="@Url.Action("OpenSendMailFormModal","Forms",new { receiverEmail = item.Applicant.Email, defaultSubject = "" })">
+                                                            Send mail
+                                                        </button>
+
+                                                        <!--  <button id='open' data-toggle="modal" data-target="#showmodal">Send Mail</button> -->
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer py-4">
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-end mb-0">
+                                    @foreach (int i in Enumerable.Range(1, (Model.ap.totalItems / Model.ap.limit) + 1))
+                                    {
+                                        if (i - 1 == Convert.ToInt32(ViewData["CurrentPage"]))
+                                        {
+                                            <li class="page-item active">
+                                                <a class="page-link" href="/Forms?postId=@postVm.PostId&limit=7&offset=@(i-1)&status=@ViewData["CurrentStatus"]">@i</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item">
+                                                <a class="page-link" href="/Forms?postId=@postVm.PostId&limit=7&offset=@(i-1)&status=@ViewData["CurrentStatus"]">@i</a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+@section Scripts {
+
+    <script>
+        $(function () {
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $("#modal-container").remove();
+                $.get($(this).data("targeturl"), function (data) {
+                    console.log(data);
+                    $('<div id="modal-container" class="modal fade">  <div class="modal-dialog modal-lg" style="width:500px;>' +
+                        '<div class="modal-content" id= "modalbody" >' +
+                        data +
+                        '</div></div></div>').modal('toggle');
+                });
+            });
+        });
+
+
+        const showAllTab = document.querySelector('.all-form');
+        const openTab = document.querySelector('.open-form');
+        const approvedTab = document.querySelector('.approved-form');
+        const rejectedTab = document.querySelector('.rejected-form');
+        const pendingTab = document.querySelector('.pending-form');
+        const revokedTab = document.querySelector('.revoked-form');
+        const canceledTab = document.querySelector('.batch-rejected-form');
+        const successfulTab = document.querySelector('.successful-form');
+        const failedTab = document.querySelector('.failed-form');
+
+        const allFilteredRows = document.querySelectorAll('.filterRow');
+        // Turns node list into an array
+        const allFilteredRowsArray = Array.from(allFilteredRows);
+
+        showAllTab.addEventListener('click', showAll);
+        function showAll() {
+            allFilteredRowsArray.forEach(row => {
+                row.classList.remove('remove')
+                row.classList.add('show')
+            })
+        }
+
+        openTab.addEventListener('click', function() {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Open)
+        });
+        approvedTab.addEventListener('click', function () {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Approved)
+        });
+        rejectedTab.addEventListener('click', function() {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Rejected)
+        });
+        pendingTab.addEventListener('click', function () {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Pending)
+        });
+        revokedTab.addEventListener('click', function () {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Revoked)
+        });
+        canceledTab.addEventListener('click', function () {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.BatchRejected)
+        });
+        successfulTab.addEventListener('click', function () {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Successfully)
+        });
+        failedTab.addEventListener('click', function () {
+            showFiltered(@CommonEnums.APPLICATION_FORM_STATUS.Failed)
+        });
+
+        function showFiltered(status) {
+            allFilteredRowsArray.forEach(row => {
+                row.classList.remove('remove');
+                if (!row.classList.contains('status-' + status)) {
+                    row.classList.add('remove')
+                }
+            })
+        }
+
+    </script>
+}

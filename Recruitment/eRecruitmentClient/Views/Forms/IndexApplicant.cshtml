@@ -1,0 +1,71 @@
+﻿@using Utils
+@model IEnumerable<BusinessObject.ApplicantPost>
+
+@{
+    ViewData["Title"] = "UserForms";
+}
+
+<h1>All application forms</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Resume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="DownloadResume" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-count="@item.Count">Download</a>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                    @switch (item.Status)
+                    {
+                        case CommonEnums.APPLICATION_FORM_STATUS.Open:
+                            <p>Opening</p>
+                            break;
+                        case CommonEnums.APPLICATION_FORM_STATUS.Approved:
+                            <p>Approved</p>
+                            break;
+                        case CommonEnums.APPLICATION_FORM_STATUS.Rejected:
+                            <p>Rejected</p>
+                            break;
+                        case CommonEnums.APPLICATION_FORM_STATUS.Revoked:
+                            <p>Revoked</p>
+                            break;
+                        case CommonEnums.APPLICATION_FORM_STATUS.BatchRejected:
+                            <p>Closed</p>
+                            break;
+                        default:
+                            <p>Opening</p>
+                            break;
+                    }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Post.Title)
+            </td>
+            <td>
+                <a class="dropdown-item" asp-action="Detail" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-count="@item.Count">Detail</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

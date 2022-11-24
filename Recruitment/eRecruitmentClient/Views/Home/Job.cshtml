@@ -1,0 +1,196 @@
+﻿@using BusinessObject.DTO
+@using BusinessObject
+@model PaginationResult<PostViewModel>
+@{
+    ViewData["Title"] = "Job";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/job.css" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+<div class="background">
+    <section class="sec-jobs-listing">
+        <div class="bg-jobs-right"></div>
+        <div class="bg-jobs-left"></div>
+        <div class="container">
+            <div class="row jobs" id="current_openings">
+                <div class="col-lg-4">
+                    <div class="find-jobs">
+                        <div class="search-key">
+                            <h6>Find your favorite jobs</h6>
+                            <div class="search-box">
+                                <i class="fa fa-search" onclick="filter()" "></i>
+                                <input type="text" class="search-all-jobs" id="keywords" placeholder="Java, JavaScript, Mobile, etc." value="@ViewData["CurrentSearch"]">
+                                <div class="clear-search-box">
+                                    <img src="https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/job/2020/icon-clear-search.svg" alt="">
+                                </div>
+                            </div>
+                            <div class="clear">
+                                <p><span>162</span> jobs available</p>
+                                <a href="" class="clear-all">Clear all</a>
+                            </div>
+                        </div>
+                        <div class="inner-filter">
+                            <div class="bonus filter">
+                                <h6>Location</h6>
+                                <div class="item">
+                                    @foreach (var item in ViewData["Locations"] as IEnumerable<Location>)
+                                    {
+                                        <a href="javascript:void(0)" class="location-list" id="@item.LocationId" onclick="toggleActive(this)">@item.LocationName</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="location filter">
+                                <h6>Domain</h6>
+                                <div class="item">
+                                    @foreach (var item in ViewData["Category"] as IEnumerable<Category>)
+                                    {
+                                        <a href="javascript:void(0)" class="category-list" id="@item.CategoryId" onclick="toggleActive(this)">@item.CategoryName</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="time filter">
+                                <h6>Job types</h6>
+                                <div class="item">
+                                    @foreach (var item in ViewData["Levels"] as IEnumerable<Level>)
+                                    {
+                                        <a href="javascript:void(0)" class="level-list" id="@item.LevelId" onclick="toggleActive(this)">@item.LevelName</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="time filter">
+                                <h6>Skills</h6>
+                                <div class="item">
+                                    @foreach (var item in ViewData["Skills"] as IEnumerable<Skill>)
+                                    {
+                                        <a href="javascript:void(0)" class="skill-list" id="@item.SkillsId" onclick="toggleActive(this)">@item.SkillName</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8" id="target-job">
+                    @{await Html.RenderPartialAsync("~/Views/Home/partial/_JobPartial.cshtml");}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function toggleActive(object) {
+            if ($(object).hasClass('active')) {
+                $(object).removeClass('active');
+            } else {
+                $(object).addClass('active');
+            }
+            jobPaging(0);
+        };
+
+        function filter() {
+            var locationIds = $(".location-list.active").map(function () { return this.id; });
+            var locationConcat = "";
+            $.each(locationIds, function (a, b) {
+                locationConcat = locationConcat + "+" + b;
+            });
+            var locations = locationConcat.substring(1);
+
+            var categoryIds = $(".category-list.active").map(function () { return this.id; });
+            var categoryConcat = "";
+            $.each(categoryIds, function (a, b) {
+                categoryConcat = categoryConcat + "+" + b;
+            });
+            var categories = categoryConcat.substring(1);
+
+            var skillIds = $(".skill-list.active").map(function () { return this.id; });
+            var skillConcat = "";
+            $.each(skillIds, function (a, b) {
+                skillConcat = skillConcat + "+" + b;
+            });
+            var skills = skillConcat.substring(1);
+
+            var levelIds = $(".level-list.active").map(function () { return this.id; });
+            var levelConcat = "";
+            $.each(levelIds, function (a, b) {
+                levelConcat = levelConcat + "+" + b;
+            });
+            var levels = levelConcat.substring(1);
+            $.ajax({
+                data: {
+                    offset: 0,
+                    limit: 10,
+                    keywords: $("#keywords").val(),
+                    category: categories,
+                    locations: locations,
+                    skills: skills,
+                    levels: levels
+                },
+                dataType: "html",
+                url: "/Home/JobPaging",
+                success: function (data) {
+                    $("#target-job").empty();
+                    $("#target-job").append(data);
+
+                    $('body, html').animate({
+                        scrollTop: 0
+                    }, 600);
+                }
+            });
+        };
+
+        function jobPaging(page) {
+
+            var locationIds = $(".location-list.active").map(function () { return this.id; });
+            var locationConcat = "";
+            $.each(locationIds, function (a, b) {
+                locationConcat = locationConcat + "+" + b;
+            });
+            var locations = locationConcat.substring(1);
+
+            var categoryIds = $(".category-list.active").map(function () { return this.id; });
+            var categoryConcat = "";
+            $.each(categoryIds, function (a, b) {
+                categoryConcat = categoryConcat + "+" + b;
+            });
+            var categories = categoryConcat.substring(1);
+
+            var skillIds = $(".skill-list.active").map(function () { return this.id; });
+            var skillConcat = "";
+            $.each(skillIds, function (a, b) {
+                skillConcat = skillConcat + "+" + b;
+            });
+            var skills = skillConcat.substring(1);
+
+            var levelIds = $(".level-list.active").map(function () { return this.id; });
+            var levelConcat = "";
+            $.each(levelIds, function (a, b) {
+                levelConcat = levelConcat + "+" + b;
+            });
+            var levels = levelConcat.substring(1);
+            $.ajax({
+                data: {
+                    offset: page,
+                    limit: 10,
+                    category: categories,
+                    locations: locations,
+                    skills: skills,
+                    levels: levels
+                },
+                dataType: "html",
+                url: "/Home/JobPaging",
+                success: function (data) {
+                    $("#target-job").empty();
+                    $("#target-job").append(data);
+
+                    $('body, html').animate({
+                        scrollTop: 0
+                    }, 600);
+                }
+            });
+        };
+    </script>
+}

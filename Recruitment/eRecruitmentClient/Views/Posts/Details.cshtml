@@ -1,0 +1,80 @@
+﻿@using System.Web
+@using BusinessObject.DTO
+@using Utils
+@using eRecruitmentClient.Utils
+@model BusinessObject.DTO.PostViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link rel="stylesheet" href="~/css/job_detail.css" />
+<div class="background">
+    <div class="sec-job-detail">
+        <div class="bg-jobs-right"></div>
+        <div class="bg-jobs-left"></div>
+        <div class="container">
+            <h4>@TempData["Message"]</h4>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h1 class="job-name">
+                                    @Model.Title
+                                </h1>
+                                <div class="job-details">
+                                    <p class="work_time">Full-time</p>
+                                    <p class="location">@Model.DisplayingLocations</p>
+                                    <p class="function">@Model.DisplayingCategory</p>
+                                    <p class="date">@Model.CreatedAt</p>
+                                </div>
+                                <div class="bonus">
+                                    @foreach (var item in Model.DisplayingSkills)
+                                    {
+                                        <p class="hybrid">@item</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="apply">
+                                    @if (AuthUtils.IsHr())
+                                    {
+                                    <form method="POST" asp-action="Status">
+                                        <input type="hidden" name="id" value="@Model.PostId" />
+                                        @if (Model.Status == CommonEnums.POST_STATUS.Available)
+                                        {
+                                            <input type="hidden" name="status" value="@CommonEnums.POST_STATUS.Pending" />
+                                            <button id='open' class="btn-careers1" type="submit">To Pending</button>
+                                        }
+                                        else if (Model.Status == CommonEnums.POST_STATUS.Pending)
+                                        {
+                                            <input type="hidden" name="status" value="@CommonEnums.POST_STATUS.Available" />
+                                            <button id='open' class="btn-careers1" type="submit">To Available</button>
+                                        }
+                                    </form>
+                                        @if (Model.Status == CommonEnums.POST_STATUS.Pending){
+                                            <form method="POST" asp-action="Status">
+                                                <input type="hidden" name="id" value="@Model.PostId" />
+                                                <input type="hidden" name="status" value="@CommonEnums.POST_STATUS.Closed" />
+                                                <button id='open' class="btn-careers1" type="submit">Close this post</button>
+                                            </form>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="description">
+                                    @Html.Raw(Model.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,170 @@
+﻿@model IEnumerable<Interview>
+@using BusinessObject
+@using eRecruitmentClient.Utils;
+@{
+    ViewData["Title"] = "Index";
+    List<Interview> listEditableInterviews = (List<Interview>)ViewData["EditableInterviews"];
+    if (listEditableInterviews == null)
+    {
+        listEditableInterviews = new List<Interview>();
+    }
+}
+
+<link rel="stylesheet" href="~/css/user_mng.css" />
+<div class="background">
+    <div class="main-content mt-4">
+        <div class="container">
+            <div class="">
+                <div>
+                    <div class="card user-table">
+                        <div class="table-title row">
+                            <div class="card-header border-0 col-md-10">
+                                <h3 class="mb-0">Interviews list</h3>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.Round)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.StartDateTime)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.EndDateTime)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.Feedback)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.Result)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.Applicant)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.Interviewer)
+                                        </th>
+                                        <th scope="col">
+                                            @Html.DisplayNameFor(model => model.Post)
+                                        </th>
+                                        <th scope="col">
+                                            Status
+                                        </th>
+                                        <th scope="col">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        bool editable = listEditableInterviews.FirstOrDefault(i => i.ApplicantId == item.ApplicantId && i.InterviewerId == item.InterviewerId && i.PostId == item.PostId && i.Round == item.Round) != null;
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Round)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartDateTime)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EndDateTime)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Feedback)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Result)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Applicant.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Interviewer.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Post.Title)
+                                            </td>
+                                            @if (item.StartDateTime > DateTime.Now)
+                                            {
+                                                <td>
+                                                    <p>Unstarted</p>
+                                                </td>
+                                                <td>
+                                                    @if (AuthUtils.IsHr())
+                                                    {
+                                                        <a class="btn btn-danger" asp-action="Delete" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-round="@item.Round">Delete</a>
+                                                        <a class="btn btn-info" asp-route-mode="Edit" asp-action="Edit" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-round="@item.Round">Edit</a>
+                                                    }
+                                                </td>
+                                            }
+                                            
+                                            @if (item.EndDateTime < DateTime.Now)
+                                            {
+                                                <td>
+
+                                                @if (string.IsNullOrEmpty(item.Feedback) && item.Result == false)
+                                                {
+                                                    <p>No feedback yet</p>
+                                                } else {
+                                                    <p>Ended</p>
+                                                }
+                                                </td>
+                                                <td>
+
+                                                    @if (AuthUtils.IsInterviewer() && editable)
+                                                    {
+                                                        <a class="btn btn-info" asp-action="Edit" asp-route-mode="Feedback" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-round="@item.Round">Feedback</a>
+                                                    }
+                                                    @if (AuthUtils.IsHr() && editable)
+                                                    {
+                                                        <a class="btn btn-info" asp-action="Edit" asp-route-mode="Feedback" asp-route-postId="@item.PostId" asp-route-applicantId="@item.ApplicantId" asp-route-round="@item.Round">Feedback</a>
+                                                    }
+                                                </td>
+                                            }
+                                            @if (item.StartDateTime <= DateTime.Now && item.EndDateTime >= DateTime.Now)
+                                            {
+                                                <td>
+                                                    <p>Interviewing</p>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer py-4">
+                            <nav aria-label="...">
+                                @*<ul class="pagination justify-content-end mb-0">
+                                        @foreach (int i in Enumerable.Range(1, (Model.totalItems / Model.limit) + 1))
+                                        {
+                                            if (i - 1 == Convert.ToInt32(ViewData["CurrentPage"]))
+                                            {
+                                                <li class="page-item active">
+                                                    <a class="page-link" href="/Forms?postId=@postVm.PostId&limit=7&offset=@(i-1)&status=@ViewData["CurrentStatus"]">@i</a>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/Forms?postId=@postVm.PostId&limit=7&offset=@(i-1)&status=@ViewData["CurrentStatus"]">@i</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>*@
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}

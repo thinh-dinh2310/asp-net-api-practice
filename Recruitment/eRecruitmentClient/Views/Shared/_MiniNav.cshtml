@@ -1,0 +1,72 @@
+﻿@using eRecruitmentClient.Utils
+
+<div class="profile-highlight">
+    <img src="https://images.unsplash.com/photo-1578976563986-fb8769ab695e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" alt="profile-img" width=36 height=36>
+    <div class="details">
+        <div id="profile-name">@AuthUtils.loginUser.FirstName @AuthUtils.loginUser.LastName</div>
+        <div id="profile-footer">@AuthUtils.loginUser.Email</div>
+    </div>
+</div>
+@if (AuthUtils.IsUser())
+{
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Account" asp-action="Profile">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/team.png" alt="team_icon" width=20 height=20>
+            <div>Profile</div>
+        </a>
+    </li>
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Forms" asp-action="IndexApplicant">
+            <img src="https://cdn-icons-png.flaticon.com/512/88/88450.png" alt="team_icon" width=20 height=20>
+            <div>All forms</div>
+        </a>
+    </li>
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Interviews" asp-route-mode="All" asp-action="Index">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/book.png" alt="team_icon" width=20 height=20>
+            <div>Interviews</div>
+        </a>
+    </li>
+}
+else if (AuthUtils.IsAdmin())
+{
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Account" asp-action="Index">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/team.png" alt="team_icon" width=20 height=20>
+            <div>Users</div>
+        </a>
+
+    </li>
+}
+else if (AuthUtils.IsHr())
+{
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Posts" asp-action="Index">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/book.png" alt="team_icon" width=20 height=20>
+            <div>Posts</div>
+        </a>
+    </li>
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Interviews" asp-route-mode="All" asp-action="GetListApprovedForms">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/book.png" alt="team_icon" width=20 height=20>
+            <div>Approved forms</div>
+        </a>
+    </li>
+}
+else if (AuthUtils.IsInterviewer())
+{
+    <li class="user-menu__item">
+        <a class="user-menu-link" asp-area="" asp-controller="Interviews" asp-route-mode="All" asp-action="Index">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/book.png" alt="team_icon" width=20 height=20>
+            <div>Interviews</div>
+        </a>
+        <a class="user-menu-link" asp-area="" asp-controller="Account" asp-action="Profile">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1604623/team.png" alt="team_icon" width=20 height=20>
+            <div>Profile</div>
+        </a>
+    </li>
+}
+
+<div class="profile-logout">
+    <li class="user-menu__item"><a class="user-menu-link" asp-area="" asp-controller="Home" asp-action="Logout" style="color: #F44336;">Logout</a></li>
+</div>

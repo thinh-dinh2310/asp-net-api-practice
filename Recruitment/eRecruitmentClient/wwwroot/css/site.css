@@ -1,0 +1,296 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+
+/* Provide sufficient contrast against white background */
+
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    height:auto;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+}
+
+.footer {
+    background-color: rgba(20,177,231,.1);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    /* Vertically center the text there */
+}
+
+/*--------------------------Header Section---------------------------------*/
+.bg {
+    background-color: rgb(223, 245, 254);
+    height: 60px;
+}
+
+    .bg a {
+        vertical-align: middle;
+        font-size: 16px;
+        font-style: normal;
+        line-height: 24px;
+        text-align: left;
+        font-weight: 500;
+        color: #4a4a4a;
+        transition: all .2s ease-in-out;
+        text-decoration: none;
+    }
+
+.header-button {
+    border-radius: 17px;
+    box-shadow: 4px 4px 5px 0 #bae4f6, -3px -4px 5px 0 #ebf9ff, -1px -1px 3px 0 #fff, 1px 1px 1px 0 #bde4f4;
+    padding: 3px 30px;
+    font-family: 'Avenir Demi'
+}
+
+    .header-button:hover {
+        color: #14b1e7;
+        box-shadow: 1px 1px 1px #b8e4f6, -1px -1px 2px #fff;
+    }
+
+.header-nav-item {
+    position: relative;
+    text-align: center;
+}
+
+    .header-nav-item::before {
+        position: absolute;
+        content: "";
+        width: 0%;
+        height: 3.5px;
+        bottom: 0px;
+        left: 0;
+        background-color: #4a4a4a;
+        -webkit-transition: .5s;
+        -o-transition: .5s;
+        transition: .5s;
+    }
+
+    .header-nav-item:hover::before {
+        width: 100%
+    }
+
+.menu-container.active {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+}
+
+.profile-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%
+}
+    .profile-wrapper,
+    .profile-wrapper * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+.menu-container {
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+}
+
+    .menu-container .active {
+        visibility: visible;
+        opacity: 1;
+        transition: all .2s ease-in-out;
+    }
+
+
+.user-menu {
+    position: absolute;
+    right: 0;
+    transform: translate(42.8%, -11%);
+    background-color: #FFFFFF;
+    width: 256px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    list-style: none;
+    z-index:2;
+}
+
+    .user-menu:before {
+        position: absolute;
+        top: -16px;
+        left: 120px;
+        display: inline-block;
+        content: "";
+        border: 8px solid transparent;
+        border-bottom-color: #E0E0E0;
+    }
+
+    .user-menu .profile-highlight {
+        display: flex;
+        border-bottom: 1px solid #E0E0E0;
+        padding: 12px 16px;
+        margin-bottom: 6px;
+    }
+
+        .user-menu .profile-highlight img {
+            width: 48px;
+            height: 48px;
+            border-radius: 25px;
+            object-fit: cover;
+        }
+
+        .user-menu .profile-highlight .details {
+            display: flex;
+            flex-direction: column;
+            margin: auto 12px;
+        }
+
+            .user-menu .profile-highlight .details #profile-name {
+                font-weight: 600;
+                font-size: 16px;
+                overflow: hidden;
+            }
+
+            .user-menu .profile-highlight .details #profile-footer {
+                font-weight: 300;
+                font-size: 14px;
+                margin-top: 4px;
+                overflow: hidden;
+            }
+
+    .user-menu .user-menu-link {
+        display: flex;
+        text-decoration: none;
+        color: #333333;
+        font-weight: 400;
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+        .user-menu .user-menu-link div {
+            margin: auto 10px;
+        }
+
+    .user-menu:after {
+        position: absolute;
+        top: -14px;
+        left: 121px;
+        display: inline-block;
+        content: "";
+        border: 7px solid transparent;
+        border-bottom-color: #FFFFFF;
+    }
+
+    .main-avatar{
+        height:100%;
+        display:flex;
+        width: 100%;
+        justify-content:flex-end;
+        align-items:center;
+    }
+/*--------------------------Header Section---------------------------------*/
+
+/*--------------------------Footer Section---------------------------------*/
+.logo-footer {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.copyright {
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.logo-footer img{
+    padding: 10px;
+    width: 120px;
+    height: auto;
+    margin-right: 24px;
+    opacity: .7;
+}
+/*--------------------------Footer Section---------------------------------*/
+
+/*--------------------------Font Section---------------------------------*/
+@font-face {
+    font-family: 'Avenir';
+    src: url('../font/Avenir Next LT Pro Regular.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Bold';
+    src: url('../font/Avenir Next LT Pro Bold.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Demi';
+    src: url('../font/Avenir Next LT Pro Demi.otf');
+}
+/*--------------------------Font Section---------------------------------*/
+

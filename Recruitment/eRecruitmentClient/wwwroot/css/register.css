@@ -1,0 +1,162 @@
+﻿/*
+    --
+*/
+
+.login-page {
+    background: linear-gradient(to top,#fcf5e4,rgb(223,245,254) 50%);
+    background-position: center center;
+    background-size: cover;
+    height: calc(100vh - 60px);;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    transition: 0.2s
+}
+
+    .login-page .login-section {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 100px;
+        transition: 0.2s
+    }
+
+.login-form {
+    width: fit-content;
+    max-width: 800px;
+    color: #fff;
+    padding: 60px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin-top: 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    box-shadow: 4px 4px 5px 0 #bae4f6, -3px -4px 5px 0 #ebf9ff, -1px -1px 3px 0 #fff, 1px 1px 1px 0 #bde4f4;
+    border-radius: 30px;
+    transition: 0.2s
+}
+
+    .login-form .right-section {
+        width: 320px;
+        border-left: 1px solid #ffffff;
+        text-align: center;
+    }
+
+        .login-form .right-section .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+            .login-form .right-section .input-group input {
+                background-color: #ffffff26;
+                color: #4a4a4a;
+                padding: 15px 20px;
+                width: 320px;
+                height: auto;
+                line-height: normal;
+                transition: color .3s ease-in-out,border-color .3s ease-in-out,background-color .3s ease-in-out;
+                box-shadow: none;
+                border-radius: 30px;
+                border: medium none;
+                font-family: Avenir;
+                box-shadow: 4px 4px 5px 0 #bae4f6, -3px -4px 5px 0 #ebf9ff, -1px -1px 3px 0 #fff, 1px 1px 1px 0 #bde4f4;
+            }
+
+                .login-form .right-section .input-group input:focus {
+                    outline: none;
+                }
+
+                .login-form .right-section .input-group input::placeholder {
+                    color: #4a4a4a;
+                    font-family: Avenir
+                }
+
+        .login-form .right-section #btn-login {
+            padding: 12.5px;
+            position: relative;
+            margin-top: 45px;
+            font-family: 'Avenir Demi';
+            box-shadow: 0 4px 20px 2px rgb(144 144 144 / 20%);
+        }
+
+button, .btn {
+    cursor: pointer;
+    border-radius: 30px;
+    outline: none;
+    width: 320px;
+    padding: 7.5px 20px;
+    font-size: 1rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    button.btn-blue:not(:disabled), .btn.btn-blue:not(:disabled) {
+        border: 1px solid #14B1E7;
+        color: #14b1e7;
+    }
+
+        button.btn-blue:not(:disabled).btn-fill, .btn.btn-blue:not(:disabled).btn-fill {
+            background-color: #14b1e7;
+            color: #fff;
+        }
+
+.login-section .login-form .left-section img {
+    width: 200px;
+    height: auto;
+}
+
+.login-form .right-section img {
+    text-align: center;
+    padding-bottom: 20px;
+    width: 100px;
+}
+
+.error-text {
+    font-family: 'Avenir Demi';
+    margin-top: 30px;
+    font-size: 15px;
+    animation: fade 0.2s;
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+body{
+    margin:0;
+}
+
+
+/*--------------------------Font Section---------------------------------*/
+@font-face {
+    font-family: 'Avenir';
+    src: url('../font/Avenir Next LT Pro Regular.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Bold';
+    src: url('../font/Avenir Next LT Pro Bold.otf');
+}
+
+@font-face {
+    font-family: 'Avenir Demi';
+    src: url('../font/Avenir Next LT Pro Demi.otf');
+}
+/*--------------------------Font Section---------------------------------*/

@@ -1,0 +1,45 @@
+﻿@using Utils
+@using System.Web;
+@using eRecruitmentClient.Utils
+@using BusinessObject.DTO
+@using BusinessObject
+@model PaginationResult<User>
+
+@foreach (var item in Model.data)
+{
+    <tr>
+        <th scope="row">
+            <div class="media align-items-center">
+                <a href="#" class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder" src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/bootstrap.jpg">
+                </a>
+                <div class="media-body">
+                    <span class="mb-0 text-sm">@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</span>
+                </div>
+            </div>
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role.RoleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" asp-action="Update" asp-route-id="@item.Id">Edit</a>
+                    <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </div>
+        </td>
+    </tr>
+}

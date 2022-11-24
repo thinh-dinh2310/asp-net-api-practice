@@ -1,0 +1,72 @@
+﻿@using BusinessObject
+@using BusinessObject.DTO
+@using Utils.Models
+@using eRecruitmentClient.Utils
+@{
+    string receiverEmail = (string)(ViewData["ReceiverEmail"]);
+    string defaultSubject = (string)(ViewData["DefaultSubject"]);
+    LoginUser loginUser = AuthUtils.loginUser;
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+@{
+    <div class="modal-content" id="mailMessageDiv">
+        <form method="POST" id="sendMailForm" asp-action="SendMailForm">
+            <div class="modal-header">
+                <h5 class="modal-title label-apply modal-title" id="exampleModalLabel">Sending mail to: @receiverEmail</h5>
+                <button type="button" class="modal-close-button btn-close close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <input type="hidden" name="To" value="@receiverEmail" />
+                    <div class="mb-3">
+                        <label class="col-form-label" for="inputSubject">Subject</label>
+                        <input type="text" name="Subject" class="form-control textarea-apply" id="inputSubject" value="@defaultSubject" />
+                        <span class="text-danger">@ViewBag.MessageSubject</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="col-form-label" for="inputBody">Body</label>
+                        <textarea class="form-control textarea-apply" id="message-text inputBody" name="body"></textarea>
+                        <span class="text-danger">@ViewBag.MessageBody</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-careers3" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn-careers1" id="submitSendMailForm" value="Send">Send</button>
+            </div>
+        </form>
+    </div>
+
+}
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    function handleSuccess(result) {
+        if (result.redirectTo) {
+            window.location.href = result.redirectTo;
+        } else {
+            $('#mailMessageDiv').html(result);
+        }
+    }
+    $('#sendMailForm')
+        .submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: $("#sendMailForm").attr("action"),
+                type: 'POST',
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    handleSuccess(data);
+                },
+                cache: false,
+            });
+
+        });
+
+</script>

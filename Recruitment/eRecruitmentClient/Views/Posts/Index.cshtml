@@ -1,0 +1,132 @@
+@using BusinessObject.DTO
+@model PaginationResult<PostViewModel>
+@using Utils
+@using System.Web;
+@using eRecruitmentClient.Utils
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/user_mng.css" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+<div class="background">
+    <div class="main-content">
+        <div class="container">
+            <!-- Table -->
+            <h2 class="mb-3">Management Account</h2>
+            <div class="row">
+                <div class="col">
+                    <div class="card user-table">
+                        <div class="table-title row">
+                            <div class="card-header border-0 col-md-3">
+                                <h3 class="mb-0">Account List</h3>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-center">
+                                <div class="input-group align-items-center">
+                                    <input id="searchValue" style="border-radius: 0;" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                                    <button type="button" class="btn" onclick="searchPost()" style="border-radius: 0; background: #32325d; color: white; padding: 0.425rem 1.25rem;">search</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center justify-content-end">
+                                <div class="create-parent"><a asp-action="Create" class="round-button">&#43;</a></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Level</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Category</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="target-job">
+                                        @{await Html.RenderPartialAsync("~/Views/Posts/_JobIndexPartial.cshtml");}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer py-4">
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-end mb-0">
+                                    @foreach (int i in Enumerable.Range(1, (Model.totalItems / Model.limit) + 1))
+                                    {
+                                        if (i == Convert.ToInt32(ViewData["CurrentPage"]))
+                                        {
+                                            <li class="page-item active" id="@i">
+                                                <a class="page-link" href="#" onclick="jobPaging(@i - 1)">@i</a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="page-item" id="@i">
+                                                <a class="page-link" href="#" onclick="jobPaging(@i - 1)">@i</a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function searchPost() {
+            $.ajax({
+                data: {
+                    offset: 0,
+                    limit: 7,
+                    keywords: $('#searchValue').val()
+                },
+                dataType: "html",
+                url: "/Posts/IndexPaging",
+                success: function (data) {
+                    $("#target-job").empty();
+                    $("#target-job").append(data);
+
+                    $('body, html').animate({
+                        scrollTop: 0
+                    }, 600);
+                }
+            });
+        }
+
+        function jobPaging(page) {
+            var listPage = $(".page-item.active").each(function () {
+                $(this).removeClass('active')
+                
+            });
+            var x = page + 1;
+            var id = "#" + x;
+            $(id).addClass('active');
+            $.ajax({
+                data: {
+                    offset: page,
+                    limit: 7,
+                    keywords: ""
+                },
+                dataType: "html",
+                url: "/Posts/IndexPaging",
+                success: function (data) {
+                    $("#target-job").empty();
+                    $("#target-job").append(data);
+
+                    $('body, html').animate({
+                        scrollTop: 0
+                    }, 600);
+                }
+            });
+        };
+    </script>
+}

@@ -1,0 +1,76 @@
+﻿@using Utils
+@using System.Web;
+@using eRecruitmentClient.Utils
+@using BusinessObject.DTO
+@model PaginationResult<PostViewModel>
+
+@foreach (var item in Model.data)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayingLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayingLocations)
+        </td>
+        <td>
+            @switch (item.Status)
+            {
+                case CommonEnums.POST_STATUS.Available:
+                    <span class="text-success">Available</span>
+                    break;
+                case CommonEnums.POST_STATUS.Deleted:
+                    <span class="text-warning">Deleted</span>
+                    break;
+                case CommonEnums.POST_STATUS.Pending:
+                    <span class="text-primary">Pending</span>
+                    break;
+                case CommonEnums.POST_STATUS.Closed:
+                    <span class="text-danger">Closed</span>
+                    break;
+                default:
+                    <span class="text-success">Available</span>
+                    break;
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayingCategory)
+        </td>
+        <td class="text-right">
+            <div class="dropdown">
+                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" asp-action="Details" asp-route-id="@item.PostId">Detail</a>
+                    <a class="dropdown-item" asp-action="FormsPage" asp-route-id="@item.PostId">View forms</a>
+                    <a class="dropdown-item" asp-action="InterviewsPage" asp-route-id="@item.PostId">View interviews</a>
+                    @if (AuthUtils.IsHr())
+                    {
+                        <form method="POST" asp-action="Status">
+                            <input type="hidden" name="id" value="@item.PostId" />
+                            @if (item.Status == CommonEnums.POST_STATUS.Available)
+                            {
+                                <input type="hidden" name="status" value="@CommonEnums.POST_STATUS.Pending" />
+                                <a class="dropdown-item" href="#" onclick="this.closest('form').submit();return false;">To Pending</a>
+                            }
+                            else if (item.Status == CommonEnums.POST_STATUS.Pending)
+                            {
+                                <input type="hidden" name="status" value="@CommonEnums.POST_STATUS.Available" />
+                                <a class="dropdown-item" href="#" onclick="this.closest('form').submit();return false;">To Available</a>
+                            }
+                        </form>
+                        @if (item.Status == CommonEnums.POST_STATUS.Available)
+                        {
+                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.PostId">Edit</a>
+                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.PostId">Delete</a>
+                        }
+                    }
+                </div>
+            </div>
+        </td>
+    </tr>
+}

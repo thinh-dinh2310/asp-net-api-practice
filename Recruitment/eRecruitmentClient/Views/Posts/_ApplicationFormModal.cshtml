@@ -1,0 +1,92 @@
+﻿@using BusinessObject.DTO
+@model ApplicationPostForCreationDto
+@{
+    PostViewModel postVm = (PostViewModel) ViewData["Post"];
+}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+@{
+    <div id="applicationFormDiv">
+        <form method="POST" id="applicationForm" enctype="multipart/form-data" asp-action="ApplyPost">
+            <div class="modal-header">
+                <h5 class="modal-title label-apply modal-title" id="exampleModalLabel">Applying for @postVm.Title</h5>
+                <button type="button" class="modal-close-button btn-close close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" asp-for="@Model.PostId" value="@postVm.PostId" />
+                <div class="mb-3">
+                    <label asp-for="@Model.Message" class="col-form-label"></label>
+                    <textarea asp-for="@Model.Message" class="form-control textarea-apply" id="message-text"></textarea>
+                    <span asp-validation-for="@Model.Message" class="text-danger"></span>
+                </div><div class="mb-3">
+                    <label asp-for="@Model.Resume" class="col-form-label"></label>
+                    <input asp-for="@Model.Resume" type="file" accept="application/pdf" />
+                    <span asp-validation-for="@Model.Resume" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-careers3" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn-careers1" id="submitApplicationForm" value="Apply">Send</button>
+            </div>
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Applying for @postVm.Title</h4>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="@Model.PostId" value="@postVm.PostId" />
+                    <div class="form-group">
+                        <label asp-for="@Model.Message" class="control-label"></label>
+                        <textarea asp-for="@Model.Message"></textarea>
+                        <span asp-validation-for="@Model.Message" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Resume" class="control-label"></label>
+                        <input asp-for="@Model.Resume" type="file" accept="application/pdf" />
+                        <span asp-validation-for="@Model.Resume" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input id="submitApplicationForm" type="submit" value="Apply" class="btn btn-primary" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
+        </form>
+    </div>
+
+}
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script>
+    function handleSuccess(result) {
+        if (result.redirectTo) {
+            window.location.href = result.redirectTo;
+        } else {
+            $('#applicationFormDiv').html(result);
+        }
+    }
+    $('#applicationForm')
+        .submit(function (e) {
+            //if (!validateForm(this)) {
+            //    alert("Your form is not valid for submission!");
+            //}
+            $.ajax({
+                url: $("#applicationForm").attr("action"),
+                type: 'POST',
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    handleSuccess(data)
+                },
+                cache: false,
+            });
+            e.preventDefault();
+
+        });
+
+</script>

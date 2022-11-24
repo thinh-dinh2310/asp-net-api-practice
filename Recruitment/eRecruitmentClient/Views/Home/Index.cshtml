@@ -1,0 +1,219 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/landing.css" />
+
+<section class="sec-home-banner">
+    <div class="bg-center"></div>
+    <div class="container landing-container">
+        <div class="row">
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-7">
+                <div class="caption">
+                    <h1>Start a career where you<br> strive toward the better every day.</h1>
+                    <div class="search-box list-unstyled">
+                        <form asp-action="Job" enctype="multipart/form-data" method="get">
+                            <div class="search-type">
+                                <img src="https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/home/banner/icon-search@2x.png" alt="" class="landing-search-icon">
+                                <input type="text" name="keywords" id="keywords" placeholder="Search jobs" class="landing-page-search">
+                                <div class="clear-search-box">
+                                    <img src="https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/job/2020/icon-clear-search.svg" alt="" class="landing-clear-icon">
+                                </div>
+                            </div>
+                            <div class="filter-search">
+                                <div class="dropdown drd-location location" style="opacity: 0">
+                                    <img src="https://careers.kms-technology.com/wp-content/themes/kms-careers2020/images/home/banner/icon-location@2x.png" alt="">
+                                    <button class="btn btn-default dropdown-toggle selected" type="button" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="">
+                                        Location
+                                    </button>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    @* //TODO: Add List of Location Here *@
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLocation">
+                                    </ul>
+                                </div>
+                                <button type="submit" id="btn-search-job" class="button btn-search-job">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="sec-experienced">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <ul class="experienced-slider-home list-unstyled slick-initialized slick-slider slick-dotted">
+                    <div class="slick-list">
+                        <div class="slick-track"
+                             style="opacity: 1; width: 1364px; transform: translate3d(0px, 0px, 0px);">
+                            <div class="slick-slide slick-current slick-active" data-slick-index="0"
+                                 aria-hidden="false" style="width: 301px;">
+                                <div>
+                    <li style="width: 100%; display: inline-block;">
+                        <div class="inner">
+                            <div class="image">
+                                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                                     alt="">
+                            </div>
+                            <h6>Team Engineering</h6>
+                            <p>
+                                Develop software services and products serving million of users.
+                            </p>
+                            <a href="" class="link-overlay btn-function"></a>
+                        </div>
+                    </li>
+            </div>
+        </div>
+        <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false"
+             style="width: 301px;">
+            <div>
+                <li style="width: 100%; display: inline-block;">
+                    <div class="inner">
+                        <div class="image">
+                            <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                                 alt="">
+                        </div>
+                        <h6>Team Product Management</h6>
+                        <p>Initiate, incubate, and launch Hope’s visionary software.</p>
+                        <a href="" class="link-overlay btn-function"></a>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+    </div>
+    </ul>
+    </div>
+    <div class="col-lg-5">
+        <div class="caption">
+            <h2>The Experienced</h2>
+            <p>
+                We believe that deep job satisfaction comes from creating real value in the works we do. We
+                are bringing together bright minds who embrace challenges, go the extra mile for added
+                value, and strive to meet very high standards. Join us if you share the
+                same values.
+            </p>
+            <a asp-area="" asp-controller="Home" asp-action="Job" class="btn-careers1">
+                Explore Job
+                Opportunities
+            </a>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<section class="sec-experienced">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="caption">
+                    <h2>Life at Hope</h2>
+                    <p>
+                        Discover what makes life at Hope intriguing, through Hopeser's' daily stories and events happening in our offices.
+                    </p>
+                    <a asp-area="" asp-controller="Home" asp-action="Job" class="btn-careers1">
+                        Explore Job
+                        Opportunities
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <ul class="experienced-slider-home list-unstyled slick-initialized slick-slider slick-dotted">
+                    <div class="slick-list">
+                        <div class="slick-track" style="opacity: 1; width: 1364px; transform: translate3d(0px, 0px, 0px);">
+                            <div class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 301px;">
+                                <div>
+                    <li style="width: 100%; display: inline-block;">
+                        <div class="inner">
+                            <div class="image">
+                                <img src="https://images.unsplash.com/photo-1576595580361-90a855b84b20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fHVpJTIwdXh8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" alt="">
+                            </div>
+                            <h6>Team Design</h6>
+                            <p>
+                                Create beautiful and intuitive artworks and experiences.
+                            </p>
+                            <a href="" class="link-overlay btn-function"></a>
+                        </div>
+                    </li>
+            </div>
+        </div>
+        <div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" style="width: 301px;">
+            <div>
+                <li style="width: 100%; display: inline-block;">
+                    <div class="inner">
+                        <div class="image">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="">
+                        </div>
+                        <h6>Team Human Resources</h6>
+                        <p>Seek, grow, and support the people of Hope with their work.</p>
+                        <a href="" class="link-overlay btn-function"></a>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </div>
+    </div>
+    </ul>
+    </div>
+    </div>
+    </div>
+</section>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".landing-page-search").on("input", function () {
+            var search = $('.landing-page-search').val();
+            if (search) {
+                $(".clear-search-box").css("display", "block");
+            } else {
+                $(".clear-search-box").css("display", "none");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $(".clear-search-box").on("click", function () {
+            $('.landing-page-search').val("");
+            $(".clear-search-box").css("display", "none");
+        });
+    });
+
+    $(document).ready(function () {
+        $(".slick-get").on("click", function () {
+            var index = $('.slick-get').index(this)
+            var i = 0;
+
+            $('.slick-get').each(function () {
+                if ($(this).hasClass('slick-active')) {
+                    $(this).removeClass("slick-active");
+                }
+                if (i == index) {
+                    var target = i * (265);
+                    console.log(target);
+                    $('.slick-track').animate({
+                        'opacity': target;
+                    }, {
+                        step: function (target, fx) {
+                            $(this).css({ "transform": "translate3d(" + target + "px, 0px, 0px)" });
+                        },
+                        duration: 1000,
+                        easing: 'linear',
+                    }, 'linear');
+                    $(this).addClass("slick-active");
+                }
+                i++;
+            });
+
+            console.log($('.slick-get').index(this))
+        });
+    });
+</script>

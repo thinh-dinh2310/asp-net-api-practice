@@ -1,0 +1,98 @@
+﻿@using BusinessObject.DTO
+@using System.Web;
+@using eRecruitmentClient.Utils
+@model MissingSkillWithPVM
+@{
+
+    ViewData["Title"] = "Job";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/job_detail.css" />
+<div class="background">
+    <div class="sec-job-detail">
+        <div class="bg-jobs-right"></div>
+        <div class="bg-jobs-left"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h1 class="job-name">
+                                    @Model.pvm.Title
+                                </h1>
+                                <div class="job-details">
+                                    <p class="work_time">Full-time</p>
+                                    <p class="location">@Model.pvm.DisplayingLocations</p>
+                                    <p class="function">@Model.pvm.DisplayingCategory</p>
+                                    <p class="date">@Model.pvm.CreatedAt</p>
+                                </div>
+                                <div class="bonus">
+                                    @foreach (var item in Model.pvm.DisplayingSkills)
+                                    {
+                                        <p class="hybrid">@item</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="apply d-flex justify-content-center flex-column">
+                                    @if (AuthUtils.IsUser() && (bool)ViewData["CanApply"] == true)
+                                    {<div style="position: absolute">
+                                            <div id="showmodal-@Model.pvm.PostId" class="modal fade" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        @{
+                                                            await Html.RenderPartialAsync("/Views/Posts/_ApplicationFormModal.cshtml", new ApplicationPostForCreationDto(), new ViewDataDictionary(this.ViewData) { { "Post", Model.pvm } });
+                                                        }
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div>
+                                        </div>
+
+                                        <!-- /.modal -->
+                                        <button id='open' class="btn-careers1 " data-toggle="modal" data-target="#showmodal-@Model.pvm.PostId">Apply for this job</button>
+                                    }
+                                    @if (AuthUtils.IsUser() && (bool)(ViewData["CanRevoke"] ?? false) == true)
+                                    {
+                                        <a class="btn-careers1 text-center" asp-area="" asp-controller="Forms" asp-action="RevokeForm" asp-route-postId="@Model.pvm.PostId">Revoke</a>
+                                    }
+                                    <p>@ViewData["FormStatusMessage"]</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        @if (AuthUtils.IsUser() && Model.missingSkill.Count() != 0)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    Look like you don't have suitable skill for this Job, are you sure want to continue? <br />
+                                    Missing Skill:
+                                    @foreach (var item in Model.missingSkill)
+                                    {
+                                        <span class="text-danger">@item.SkillName </span>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="description">
+                                    @Html.Raw(Model.pvm.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+
+    </script>
+}

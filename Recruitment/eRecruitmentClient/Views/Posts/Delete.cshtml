@@ -1,0 +1,61 @@
+﻿@model BusinessObject.DTO.PostViewModel
+@using System.Web
+@using BusinessObject.DTO
+@using Utils
+@using eRecruitmentClient.Utils
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<link rel="stylesheet" href="~/css/job_detail.css" />
+<div class="background">
+    <div class="sec-job-detail">
+        <div class="bg-jobs-right"></div>
+        <div class="bg-jobs-left"></div>
+        <div class="container pb-2" style="text-align: center;">
+            <h3 style="color: #003c70 ">Are you sure want to delete this Post?</h3>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h1 class="job-name">
+                                    @Model.Title
+                                </h1>
+                                <div class="job-details">
+                                    <p class="work_time">Full-time</p>
+                                    <p class="location">@Model.DisplayingLocations</p>
+                                    <p class="function">@Model.DisplayingCategory</p>
+                                    <p class="date">@Model.CreatedAt</p>
+                                </div>
+                                <div class="bonus">
+                                    @foreach (var item in Model.DisplayingSkills)
+                                    {
+                                        <p class="hybrid">@item</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="apply">
+                                    <form method="POST" asp-action="Delete">
+                                        <input type="hidden" asp-for="PostId" />
+                                        <input type="submit" value="Confirm Delete" class="btn-careers2" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="description">
+                                    @Html.Raw(Model.Description)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

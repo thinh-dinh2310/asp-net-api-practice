@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout_NoFooter.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/login.css" />
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+<div class="login-page">
+    <div class="login-section">
+        <div class="login-form">
+            <div class="right-section">
+                <img src="~/images/Hope.png" />
+                <form data-ajax="true"
+                      data-ajax-method="post"
+                      data-ajax-update="#panel"
+                      data-ajax-mode='replace'
+                      data-ajax-complete="loginSuccess"
+                      data-ajax-url="@Url.Action("Login","Home")">
+                    <div class="input-group">
+                        <input name="email" placeholder="Email" class="input" type="text" required />
+                    </div>
+                    <div class="input-group">
+                        <input type="password" placeholder="Password" name="password" class="" required />
+                    </div>
+                    <div>
+                        <input type="submit" value="LOGIN" class="btn btn-blue btn-fill" id="btn-login" />
+                    </div>
+                </form>
+            </div>
+            <div id="panel">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function loginSuccess(result) {
+            var returnUrl = jQuery.parseJSON(result.responseText).url;
+            if (returnUrl) {
+                window.location.href = returnUrl;
+            }
+        };
+    </script>
+}
